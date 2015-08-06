@@ -1,9 +1,7 @@
 package com.mikemunhall.hbasedaotest.domain;
 
-import org.springframework.stereotype.Component;
 import java.util.Date;
 
-@Component
 class SessionData {
 
     private String sessionId;
