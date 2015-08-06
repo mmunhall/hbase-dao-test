@@ -1,5 +1,7 @@
 package com.mikemunhall.hbasedaotest;
 
+import com.mikemunhall.hbasedaotest.dao.SessionDataDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.*;

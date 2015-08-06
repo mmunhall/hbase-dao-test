@@ -19,19 +19,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MockServletContext.class)
 @WebAppConfiguration
-public class WebControllerTest {
+public class SessionControllerTest {
 
     private MockMvc mvc;
 
     @Before
     public void setUp() throws Exception {
-        mvc = MockMvcBuilders.standaloneSetup(new WebController()).build();
+        mvc = MockMvcBuilders.standaloneSetup(new SessionController()).build();
     }
 
     @Test
-    public void getHome() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+    public void getTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/test").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Hello World!")));
+                .andExpect(content().string(equalTo("Hello Test!")));
     }
 }
