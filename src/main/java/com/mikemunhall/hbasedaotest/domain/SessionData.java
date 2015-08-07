@@ -1,14 +1,11 @@
 package com.mikemunhall.hbasedaotest.domain;
 
-import java.util.Date;
-
 public class SessionData {
 
     private String sessionId;
     private String identity;
     private String providerId;
     private String platform;
-    private Date datetime;
 
     public SessionData() { }
 
@@ -42,13 +39,5 @@ public class SessionData {
 
     public String getPlatform() {
         return platform;
-    }
-
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
-    }
-
-    public Date getDatetime() {
-        return datetime;
     }
 }

@@ -25,7 +25,6 @@ public class SessionController {
         sd.setIdentity("identity1");
         sd.setPlatform("Comcast");
         sd.setProviderId("nbcu");
-        sd.setDatetime(new Date());
 
         return sd;
     }

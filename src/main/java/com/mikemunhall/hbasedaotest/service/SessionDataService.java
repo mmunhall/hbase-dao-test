@@ -4,8 +4,6 @@ import com.mikemunhall.hbasedaotest.dao.SessionDataDao;
 import com.mikemunhall.hbasedaotest.domain.SessionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -22,7 +20,6 @@ public class SessionDataService {
         sd.setIdentity(params.get("identity"));
         sd.setPlatform(params.get("platform"));
         sd.setProviderId(params.get("providerId"));
-        sd.setDatetime(new Date());
 
         dao.save(sd);
 

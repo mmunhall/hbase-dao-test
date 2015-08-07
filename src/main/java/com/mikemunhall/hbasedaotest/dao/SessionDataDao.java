@@ -32,7 +32,6 @@ public class SessionDataDao {
                 p.add(cfSessionData, qIdentity, Bytes.toBytes(sd.getIdentity()));
                 p.add(cfSessionData, qPlatform, Bytes.toBytes(sd.getPlatform()));
                 p.add(cfSessionData, qProviderId, Bytes.toBytes(sd.getProviderId()));
-                p.add(cfSessionData, qDatetime, Bytes.toBytes(sd.getDatetime().getTime()));
                 table.put(p);
                 return sd;
             }
