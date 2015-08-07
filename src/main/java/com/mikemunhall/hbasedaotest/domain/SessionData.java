@@ -2,7 +2,7 @@ package com.mikemunhall.hbasedaotest.domain;
 
 import java.util.Date;
 
-class SessionData {
+public class SessionData {
 
     private String sessionId;
     private String identity;

@@ -30,8 +30,15 @@ public class SessionControllerTest {
 
     @Test
     public void getTest() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/test").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.get("/session/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Hello Test!")));
+                .andExpect(content().string(equalTo("get!")));
+    }
+
+    @Test
+    public void postTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/session/").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("post!")));
     }
 }
