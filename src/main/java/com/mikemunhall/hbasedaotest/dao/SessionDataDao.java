@@ -1,6 +1,9 @@
 package com.mikemunhall.hbasedaotest.dao;
 
 import com.mikemunhall.hbasedaotest.domain.SessionData;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -8,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
 import org.springframework.data.hadoop.hbase.TableCallback;
 import org.springframework.stereotype.Repository;
+import javax.annotation.PostConstruct;
+import java.io.IOException;
 
 @Repository
 public class SessionDataDao {
@@ -23,6 +28,20 @@ public class SessionDataDao {
 
     public SessionDataDao() { }
 
+    @PostConstruct
+    public void init() throws IOException {
+        HBaseAdmin admin = new HBaseAdmin(hbaseTemplate.getConfiguration());
+
+        if (!admin.tableExists(Bytes.toBytes(tableName))) {
+            HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);
+            HColumnDescriptor columnDescriptor = new HColumnDescriptor(cfSessionData);
+            tableDescriptor.addFamily(columnDescriptor);
+            admin.createTable(tableDescriptor);
+
+            //TODO: Log info message about creating table.
+        }
+    }
+
     public void save(SessionData sd) {
         hbaseTemplate.execute(tableName, new TableCallback<SessionData>() {
             public SessionData doInTable(HTableInterface table) throws Throwable {
@@ -31,6 +50,7 @@ public class SessionDataDao {
                 p.add(cfSessionData, qPlatform, Bytes.toBytes(sd.getPlatform()));
                 p.add(cfSessionData, qProviderId, Bytes.toBytes(sd.getProviderId()));
                 table.put(p);
+
                 return sd;
             }
         });
