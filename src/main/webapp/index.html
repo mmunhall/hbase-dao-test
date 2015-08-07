@@ -7,17 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Session Collector Utility Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/template.css">
 </head>
 
 <body>
 
-<form action="/session" method="post">
+<!--<form action="/session" method="post">
     Session ID: <input type="text" name="sessionId" value=""><br>
     Identity: <input type="text" name="identity" value=""><br>
     Platform: <input type="text" name="platform" value=""><br>
     Provider ID: <input type="text" name="providerId" value=""><br>
     <input type="submit">
-</form>
+</form>-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Session Collector Utility Dashboard</a>
+        </div>
+        <!--<div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#navAddOne">Add One</a></li>
+                <li><a href="#navAddMany">Add Many</a></li>
+                <li><a href="#navQuery">Query</a></li>
+            </ul>
+        </div>-->
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1 class="page-header">Add One Session</h1>
+
+    <form action="/session" method="POST">
+        <div class="form-group">
+            <label for="sessionId">Session ID</label>
+            <input type="text" class="form-control" id="sessionId" name="sessionId">
+        </div>
+        <div class="form-group">
+            <label for="identity">Identity</label>
+            <input type="text" class="form-control" id="identity" name="identity">
+        </div>
+        <div class="form-group">
+            <label for="providerId">Provider ID</label>
+            <input type="text" class="form-control" id="providerId" name="providerId">
+        </div>
+        <div class="form-group">
+            <label for="identity">Platform</label>
+            <input type="text" class="form-control" id="platform" name="platform">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+</div><!-- /.container -->
 
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
