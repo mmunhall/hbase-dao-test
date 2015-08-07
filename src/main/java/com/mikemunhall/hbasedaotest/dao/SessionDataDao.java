@@ -1,7 +1,6 @@
 package com.mikemunhall.hbasedaotest.dao;
 
 import com.mikemunhall.hbasedaotest.domain.SessionData;
-import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
