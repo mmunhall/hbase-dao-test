@@ -12,14 +12,6 @@
 
 <body>
 
-<!--<form action="/session" method="post">
-    Session ID: <input type="text" name="sessionId" value=""><br>
-    Identity: <input type="text" name="identity" value=""><br>
-    Platform: <input type="text" name="platform" value=""><br>
-    Provider ID: <input type="text" name="providerId" value=""><br>
-    <input type="submit">
-</form>-->
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -33,9 +25,9 @@
         </div>
         <!--<div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#navAddOne">Add One</a></li>
-                <li><a href="#navAddMany">Add Many</a></li>
-                <li><a href="#navQuery">Query</a></li>
+                <li><a href="#addOneSession">Add One</a></li>
+                <li><a href="#addManySessions">Add Many</a></li>
+                <li><a href="#queryForSessions">Query</a></li>
             </ul>
         </div>-->
     </div>
@@ -45,27 +37,56 @@
 
     <h1 class="page-header">Add One Session</h1>
 
-    <form action="/session" method="POST">
+    <form class="form-inline" action="/session" method="POST">
         <div class="form-group">
-            <label for="sessionId">Session ID</label>
-            <input type="text" class="form-control" id="sessionId" name="sessionId">
+            <input type="text" class="form-control" name="sessionId" placeholder="Session ID">
         </div>
         <div class="form-group">
-            <label for="identity">Identity</label>
-            <input type="text" class="form-control" id="identity" name="identity">
+            <input type="text" class="form-control" name="identity" placeholder="Identity">
         </div>
         <div class="form-group">
-            <label for="providerId">Provider ID</label>
-            <input type="text" class="form-control" id="providerId" name="providerId">
+            <input type="text" class="form-control" name="providerId" placeholder="Provider ID">
         </div>
         <div class="form-group">
-            <label for="identity">Platform</label>
-            <input type="text" class="form-control" id="platform" name="platform">
+            <input type="text" class="form-control" name="platform" placeholder="Platform">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 
-</div><!-- /.container -->
+    <h1 class="page-header">Add Many Sessions</h1>
+
+    <form class="form-inline" action="/session/many" method="POST">
+        <div class="form-group">
+            <input type="text" class="form-control" name="sessionIdPrefix" placeholder="Session ID Prefix">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="start" placeholder="Start">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="end" placeholder="End">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="identity" placeholder="Identity">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="providerId" placeholder="Provider ID">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="platform" placeholder="Platform">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+    <h1 class="page-header">Query For Sessions</h1>
+
+    <form class="form-inline" action="/" method="GET">
+        <div class="form-group">
+            <input type="text" class="form-control" name="sessionId" placeholder="Session ID">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+</div>
 
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
