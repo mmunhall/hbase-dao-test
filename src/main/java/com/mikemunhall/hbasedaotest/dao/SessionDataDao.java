@@ -20,7 +20,6 @@ public class SessionDataDao {
     private byte[] qIdentity = Bytes.toBytes("identity");
     private byte[] qPlatform = Bytes.toBytes("platform");
     private byte[] qProviderId = Bytes.toBytes("providerId");
-    private byte[] qDatetime = Bytes.toBytes("datetime");
 
     public SessionDataDao() { }
 
