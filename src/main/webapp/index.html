@@ -50,7 +50,7 @@
         <div class="form-group">
             <input type="text" class="form-control" name="platform" placeholder="Platform">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <h1 class="page-header">Add Many Sessions</h1>
@@ -74,16 +74,37 @@
         <div class="form-group">
             <input type="text" class="form-control" name="platform" placeholder="Platform">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <h1 class="page-header">Query For Sessions</h1>
+    <h1 class="page-header">Get Session</h1>
 
     <form class="form-inline" action="/" method="GET">
         <div class="form-group">
             <input type="text" class="form-control" name="sessionId" placeholder="Session ID">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h1 class="page-header">Delete One Session</h1>
+
+    <form class="form-inline" action="/" method="DELETE">
+        <div class="form-group">
+            <input type="text" class="form-control" name="sessionId" placeholder="Session ID">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h1 class="page-header">Delete All Sessions</h1>
+
+    <form class="form-inline" action="/" method="DELETE">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h1 class="page-header">Count Sessions</h1>
+
+    <form class="form-inline" action="/count" method="GET">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 </div>
