@@ -43,6 +43,15 @@ public class SessionDataDao {
         }
     }
 
+    public void drop() throws IOException {
+        HBaseAdmin admin = new HBaseAdmin(hbaseTemplate.getConfiguration());
+
+        if (admin.isTableEnabled(tableName)) {
+            admin.disableTable(tableName);
+        }
+        admin.deleteTable(tableName);
+    }
+
     public void save(SessionData sd) {
         hbaseTemplate.execute(tableName, new TableCallback<SessionData>() {
             public SessionData doInTable(HTableInterface table) throws Throwable {
