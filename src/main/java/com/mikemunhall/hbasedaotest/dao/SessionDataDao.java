@@ -3,16 +3,16 @@ package com.mikemunhall.hbasedaotest.dao;
 import com.mikemunhall.hbasedaotest.domain.SessionData;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.client.HBaseAdmin;
-import org.apache.hadoop.hbase.client.HTableInterface;
-import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
+import org.springframework.data.hadoop.hbase.RowMapper;
 import org.springframework.data.hadoop.hbase.TableCallback;
 import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.List;
 
 @Repository
 public class SessionDataDao {
@@ -21,7 +21,8 @@ public class SessionDataDao {
     private HbaseTemplate hbaseTemplate;
 
     private String tableName = "sessionData";
-    private byte[] cfSessionData = Bytes.toBytes("sd");
+    private String columnFamily = "sd";
+    private byte[] cfSessionData = Bytes.toBytes(columnFamily);
     private byte[] qIdentity = Bytes.toBytes("identity");
     private byte[] qPlatform = Bytes.toBytes("platform");
     private byte[] qProviderId = Bytes.toBytes("providerId");
@@ -54,6 +55,36 @@ public class SessionDataDao {
                 return sd;
             }
         });
+    }
+
+    public List<SessionData> findAll() {
+        Scan scan = new Scan();
+        scan.setMaxResultSize(100l); // TODO: Investigate. This setting is ignored on my local standalone installation.
+
+        return hbaseTemplate.find(tableName, scan, new SessionDataRowMapper());
+    }
+
+    public SessionData findOne(String sessionId) {
+        SessionData sd = hbaseTemplate.get(tableName, sessionId, columnFamily, new SessionDataRowMapper());
+
+        if (sd.getSessionId() == null) {
+            sd = null;
+        }
+
+        return sd;
+    }
+
+    private class SessionDataRowMapper implements RowMapper<SessionData> {
+        @Override
+        public SessionData mapRow(Result result, int rowNum) throws Exception {
+            SessionData sd = new SessionData();
+            sd.setSessionId(Bytes.toString(result.getRow()));
+            sd.setIdentity(Bytes.toString(result.getValue(cfSessionData, qIdentity)));
+            sd.setPlatform(Bytes.toString(result.getValue(cfSessionData, qPlatform)));
+            sd.setProviderId(Bytes.toString(result.getValue(cfSessionData, qProviderId)));
+
+            return sd;
+        }
     }
 
 }

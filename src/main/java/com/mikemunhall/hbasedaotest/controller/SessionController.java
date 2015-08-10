@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,21 +17,20 @@ public class SessionController {
     @Autowired
     private SessionDataService service;
 
-    @RequestMapping(method=RequestMethod.GET)
-    public SessionData getSessions() {
-        SessionData sd = new SessionData();
-        sd.setSessionId("session1");
-        sd.setIdentity("identity1");
-        sd.setPlatform("Comcast");
-        sd.setProviderId("nbcu");
-
-        return sd;
-    }
-
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(value="/createOne", method=RequestMethod.POST)
     public SessionData postSession(@RequestParam Map<String, String> params) {
         SessionData sd = service.saveSession(params);
         return sd;
+    }
+
+    @RequestMapping(value="/getOne", method=RequestMethod.GET)
+    public SessionData getSession(@RequestParam("sessionId") String sessionId) {
+        return service.getSession(sessionId);
+    }
+
+    @RequestMapping(value="/getAll", method=RequestMethod.GET)
+    public List<SessionData> getSessions() {
+        return service.getSessions();
     }
 
 }

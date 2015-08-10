@@ -4,6 +4,8 @@ import com.mikemunhall.hbasedaotest.dao.SessionDataDao;
 import com.mikemunhall.hbasedaotest.domain.SessionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -13,6 +15,14 @@ public class SessionDataService {
     private SessionDataDao dao;
 
     public SessionDataService() { }
+
+    public List<SessionData> getSessions() {
+        return dao.findAll();
+    }
+
+    public SessionData getSession(String sessionId) {
+        return dao.findOne(sessionId);
+    }
 
     public SessionData saveSession(Map<String, String> params) {
         SessionData sd = new SessionData();

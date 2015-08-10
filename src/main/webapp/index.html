@@ -37,7 +37,7 @@
 
     <h1 class="page-header">Add One Session</h1>
 
-    <form class="form-inline" action="/session" method="POST">
+    <form class="form-inline" action="/session/createOne" method="POST">
         <div class="form-group">
             <input type="text" class="form-control" name="sessionId" placeholder="Session ID">
         </div>
@@ -55,7 +55,7 @@
 
     <h1 class="page-header">Add Many Sessions</h1>
 
-    <form class="form-inline" action="/session/many" method="POST">
+    <form class="form-inline" action="/session/createMany" method="POST">
         <div class="form-group">
             <input type="text" class="form-control" name="sessionIdPrefix" placeholder="Session ID Prefix">
         </div>
@@ -77,18 +77,24 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <h1 class="page-header">Get Session</h1>
+    <h1 class="page-header">Get One Session</h1>
 
-    <form class="form-inline" action="/" method="GET">
+    <form class="form-inline" action="/session/getOne" method="GET">
         <div class="form-group">
             <input type="text" class="form-control" name="sessionId" placeholder="Session ID">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
+    <h1 class="page-header">Get All Sessions (Max 100)</h1>
+
+    <form class="form-inline" action="/session/getAll" method="GET">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
     <h1 class="page-header">Delete One Session</h1>
 
-    <form class="form-inline" action="/" method="DELETE">
+    <form class="form-inline" action="/session/deleteOne" method="DELETE">
         <div class="form-group">
             <input type="text" class="form-control" name="sessionId" placeholder="Session ID">
         </div>
@@ -97,7 +103,7 @@
 
     <h1 class="page-header">Delete All Sessions</h1>
 
-    <form class="form-inline" action="/" method="DELETE">
+    <form class="form-inline" action="/session/deleteAll" method="DELETE">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
