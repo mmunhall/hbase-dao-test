@@ -56,15 +56,15 @@ public class SessionDataDao {
     }
 
     public void save(SessionData sd) {
-        hbaseTemplate.execute(tableNameStr, new TableCallback<SessionData>() {
-            public SessionData doInTable(HTableInterface table) throws Throwable {
+        hbaseTemplate.execute(tableNameStr, new TableCallback<Object>() {
+            public Object doInTable(HTableInterface table) throws Throwable {
                 Put p = new Put(Bytes.toBytes(sd.getSessionId()));
                 p.addColumn(cfSessionData, qIdentity, Bytes.toBytes(sd.getIdentity()));
                 p.addColumn(cfSessionData, qPlatform, Bytes.toBytes(sd.getPlatform()));
                 p.addColumn(cfSessionData, qProviderId, Bytes.toBytes(sd.getProviderId()));
                 table.put(p);
 
-                return sd;
+                return null;
             }
         });
     }
