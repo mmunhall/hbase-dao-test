@@ -10,7 +10,7 @@
     <properties>
         <java.version>1.8</java.version>
         <hadoop.version>2.6.0</hadoop.version>
-        <hbase.version>0.98.13-hadoop2</hbase.version>
+        <hbase.version>1.0.1</hbase.version>
     </properties>
 
     <parent>

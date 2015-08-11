@@ -3,6 +3,7 @@ package com.mikemunhall.hbasedaotest.dao;
 import com.mikemunhall.hbasedaotest.domain.SessionData;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,11 @@ public class SessionDataDao {
 
     @PostConstruct
     public void init() throws IOException {
-        HBaseAdmin admin = new HBaseAdmin(hbaseTemplate.getConfiguration());
+        Admin admin = ConnectionFactory.createConnection(hbaseTemplate.getConfiguration()).getAdmin();
+        TableName tn = TableName.valueOf(tableName);
 
-        if (!admin.tableExists(Bytes.toBytes(tableName))) {
-            HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);
+        if (!admin.tableExists(tn)) {
+            HTableDescriptor tableDescriptor = new HTableDescriptor(tn);
             HColumnDescriptor columnDescriptor = new HColumnDescriptor(cfSessionData);
             tableDescriptor.addFamily(columnDescriptor);
             admin.createTable(tableDescriptor);
@@ -44,21 +46,22 @@ public class SessionDataDao {
     }
 
     public void drop() throws IOException {
-        HBaseAdmin admin = new HBaseAdmin(hbaseTemplate.getConfiguration());
+        Admin admin = ConnectionFactory.createConnection(hbaseTemplate.getConfiguration()).getAdmin();
+        TableName tn = TableName.valueOf(tableName);
 
-        if (admin.isTableEnabled(tableName)) {
-            admin.disableTable(tableName);
+        if (admin.isTableEnabled(tn)) {
+            admin.disableTable(tn);
         }
-        admin.deleteTable(tableName);
+        admin.deleteTable(tn);
     }
 
     public void save(SessionData sd) {
         hbaseTemplate.execute(tableName, new TableCallback<SessionData>() {
             public SessionData doInTable(HTableInterface table) throws Throwable {
                 Put p = new Put(Bytes.toBytes(sd.getSessionId()));
-                p.add(cfSessionData, qIdentity, Bytes.toBytes(sd.getIdentity()));
-                p.add(cfSessionData, qPlatform, Bytes.toBytes(sd.getPlatform()));
-                p.add(cfSessionData, qProviderId, Bytes.toBytes(sd.getProviderId()));
+                p.addColumn(cfSessionData, qIdentity, Bytes.toBytes(sd.getIdentity()));
+                p.addColumn(cfSessionData, qPlatform, Bytes.toBytes(sd.getPlatform()));
+                p.addColumn(cfSessionData, qProviderId, Bytes.toBytes(sd.getProviderId()));
                 table.put(p);
 
                 return sd;
