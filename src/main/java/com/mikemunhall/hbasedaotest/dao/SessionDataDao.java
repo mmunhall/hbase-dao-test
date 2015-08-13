@@ -21,7 +21,7 @@ public class SessionDataDao {
     @Autowired
     private HbaseTemplate hbaseTemplate;
 
-    private String tableNameStr = "sessionData";
+    private String tableNameStr = "SessionCollector";
     private String columnFamily = "sd";
     private byte[] cfSessionData = Bytes.toBytes(columnFamily);
     private byte[] qIdentity = Bytes.toBytes("identity");
@@ -41,6 +41,7 @@ public class SessionDataDao {
         if (!admin.tableExists(tn)) {
             HTableDescriptor tableDescriptor = new HTableDescriptor(tn);
             HColumnDescriptor columnDescriptor = new HColumnDescriptor(cfSessionData);
+            columnDescriptor.setTimeToLive(432000); // five days
             tableDescriptor.addFamily(columnDescriptor);
             admin.createTable(tableDescriptor);
 
