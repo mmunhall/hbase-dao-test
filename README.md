@@ -17,7 +17,7 @@ You should have an instance of HBase available and running. You can install a st
 Setup
 -----
 
-Update src/main/resources/application.properties with the connection properties of your HBase installation.
+Update `src/main/resources/application.properties` with the connection properties of your HBase installation.
 
 Run
 ---
